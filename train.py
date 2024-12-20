@@ -7,7 +7,8 @@ from skimage.filters import threshold_mean
 from skimage.transform import resize
 import network
 import os
-
+import cv2
+import glob
 # Helper Functions
 def get_corrupted_input(input, corruption_level):
     corrupted = np.copy(input)
@@ -34,7 +35,7 @@ def plot(data, test, predicted, figsize=(5, 6)):
     count=0
     file_count=0
     for d in split(data, 4):
-        if not len(d)is 1: 
+        if len(d) != 1: 
             fig, axarr = plt.subplots(len(d), 3)
             for i in range(len(d)):
                 if i==0:
@@ -87,9 +88,6 @@ def preprocessing(img, w=128, h=128):
 
 def main():
     # Load data
-
-    import cv2
-    import glob
     img_dir = "train/" # Enter Directory of all images 
     data_path = os.path.join(img_dir,'*g')
     files = glob.glob(data_path)
